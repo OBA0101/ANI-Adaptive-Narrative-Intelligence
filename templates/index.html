@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        ANI | Adaptive Narrative Intelligence
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+<main class="container">
+
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <header class="hero">
+
+        <p class="eyebrow">
+            ADAPTIVE NARRATIVE INTELLIGENCE
+        </p>
+
+        <h1>
+            Every story should respond to the person experiencing it.
+        </h1>
+
+        <p class="intro">
+            ANI creates interactive narratives that adapt
+            to your emotional state and decisions.
+        </p>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         EMOTION SELECTION
+         ===================================================== -->
+
+    <section
+        id="emotion-section"
+        class="story-card"
+    >
+
+        <h2>
+            How are you feeling right now?
+        </h2>
+
+        <p class="section-description">
+            Your emotional state will influence the narrative
+            experience.
+        </p>
+
+
+        <div class="emotion-grid">
+
+            <button
+                class="emotion-btn"
+                onclick="selectEmotion('Inspired')"
+            >
+                ✨ Inspired
+            </button>
+
+            <button
+                class="emotion-btn"
+                onclick="selectEmotion('Curious')"
+            >
+                🔎 Curious
+            </button>
+
+            <button
+                class="emotion-btn"
+                onclick="selectEmotion('Confused')"
+            >
+                💭 Confused
+            </button>
+
+            <button
+                class="emotion-btn"
+                onclick="selectEmotion('Unmotivated')"
+            >
+                🌧️ Unmotivated
+            </button>
+
+            <button
+                class="emotion-btn"
+                onclick="selectEmotion('Calm')"
+            >
+                🌿 Calm
+            </button>
+
+            <button
+                class="emotion-btn"
+                onclick="selectEmotion('Excited')"
+            >
+                🚀 Excited
+            </button>
+
+        </div>
+
+
+        <div
+            id="selected-emotion"
+            class="selected-emotion"
+        >
+            Select an emotion to begin.
+        </div>
+
+
+        <button
+            id="begin-btn"
+            class="begin-btn"
+            onclick="beginStory()"
+            disabled
+        >
+            Begin My Story →
+        </button>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STORY EXPERIENCE
+         ===================================================== -->
+
+    <section
+        id="story-section"
+        class="story-card hidden"
+    >
+
+        <div class="story-header">
+
+            <p class="eyebrow">
+                YOUR ADAPTIVE STORY
+            </p>
+
+            <p id="stage-indicator">
+                Stage 1 of 4
+            </p>
+
+            <h2>
+                Your Journey
+            </h2>
+
+        </div>
+
+
+        <!-- =================================================
+             NARRATIVE
+             ================================================= -->
+
+        <div
+            id="story-content"
+            class="story-content"
+        >
+            Your story will appear here.
+        </div>
+
+
+
+        <!-- =================================================
+             NARRATIVE STATE
+             ================================================= -->
+
+        <div
+            id="state-dashboard"
+            class="state-dashboard"
+        >
+
+            <div class="state-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        NARRATIVE STATE
+                    </p>
+
+                    <h3>
+                        How your journey is evolving
+                    </h3>
+
+                </div>
+
+                <span id="emotion-display">
+                    Emotion
+                </span>
+
+            </div>
+
+
+            <!-- Confidence -->
+
+            <div class="state-row">
+
+                <div class="state-label">
+
+                    <span>
+                        Confidence
+                    </span>
+
+                    <span id="confidence-value">
+                        0
+                    </span>
+
+                </div>
+
+                <div class="state-bar">
+
+                    <div
+                        id="confidence-bar"
+                        class="state-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Curiosity -->
+
+            <div class="state-row">
+
+                <div class="state-label">
+
+                    <span>
+                        Curiosity
+                    </span>
+
+                    <span id="curiosity-value">
+                        0
+                    </span>
+
+                </div>
+
+                <div class="state-bar">
+
+                    <div
+                        id="curiosity-bar"
+                        class="state-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Momentum -->
+
+            <div class="state-row">
+
+                <div class="state-label">
+
+                    <span>
+                        Momentum
+                    </span>
+
+                    <span id="momentum-value">
+                        0
+                    </span>
+
+                </div>
+
+                <div class="state-bar">
+
+                    <div
+                        id="momentum-bar"
+                        class="state-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Reflection -->
+
+            <div class="state-row">
+
+                <div class="state-label">
+
+                    <span>
+                        Reflection
+                    </span>
+
+                    <span id="reflection-value">
+                        0
+                    </span>
+
+                </div>
+
+                <div class="state-bar">
+
+                    <div
+                        id="reflection-bar"
+                        class="state-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Risk Taking -->
+
+            <div class="state-row">
+
+                <div class="state-label">
+
+                    <span>
+                        Risk-taking
+                    </span>
+
+                    <span id="risk-taking-value">
+                        0
+                    </span>
+
+                </div>
+
+                <div class="state-bar">
+
+                    <div
+                        id="risk-taking-bar"
+                        class="state-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CHOICES
+             ================================================= -->
+
+        <div
+            id="choice-section"
+            class="choice-section"
+        >
+
+            <h3>
+                What will you do?
+            </h3>
+
+
+            <div
+                id="choices"
+                class="choices"
+            >
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             LOADING
+             ================================================= -->
+
+        <div
+            id="loading"
+            class="loading hidden"
+        >
+            ANI is adapting your story...
+        </div>
+
+
+
+        <!-- =================================================
+             COMPLETION
+             ================================================= -->
+
+        <div
+            id="completion-message"
+            class="completion-message hidden"
+        >
+
+            <h3>
+                Your journey is complete.
+            </h3>
+
+            <p>
+                Your choices shaped the experience.
+            </p>
+
+        </div>
+
+
+
+        <button
+            id="restart-btn"
+            class="restart-btn"
+            onclick="restartStory()"
+        >
+            ← Start Another Story
+        </button>
+
+    </section>
+
+</main>
+
+
+
+<script>
+
+
+// ==========================================================
+// APPLICATION STATE
+// ==========================================================
+
+let selectedEmotion = "";
+
+let currentStage = 1;
+
+
+// ==========================================================
+// SELECT EMOTION
+// ==========================================================
+
+function selectEmotion(emotion) {
+
+    selectedEmotion = emotion;
+
+    document
+        .getElementById("selected-emotion")
+        .textContent =
+        "You selected: " + emotion;
+
+    document
+        .getElementById("begin-btn")
+        .disabled = false;
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".emotion-btn"
+        );
+
+
+    buttons.forEach(button => {
+
+        button.classList.remove(
+            "selected"
+        );
+
+
+        if (
+            button.textContent
+                .toLowerCase()
+                .includes(
+                    emotion.toLowerCase()
+                )
+        ) {
+
+            button.classList.add(
+                "selected"
+            );
+
+        }
+
+    });
+
+}
+
+
+// ==========================================================
+// BEGIN STORY
+// ==========================================================
+
+async function beginStory() {
+
+    if (!selectedEmotion) {
+        return;
+    }
+
+
+    const beginButton =
+        document.getElementById(
+            "begin-btn"
+        );
+
+
+    beginButton.disabled = true;
+
+    beginButton.textContent =
+        "Creating Your Story...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/start-story",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        emotion:
+                            selectedEmotion
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            alert(
+                data.message
+            );
+
+            return;
+
+        }
+
+
+        currentStage = data.stage;
+
+
+        document
+            .getElementById(
+                "emotion-section"
+            )
+            .classList.add(
+                "hidden"
+            );
+
+
+        document
+            .getElementById(
+                "story-section"
+            )
+            .classList.remove(
+                "hidden"
+            );
+
+
+        displayStory(
+            data.story,
+            data.choices
+        );
+
+
+        updateStageIndicator();
+
+        updateNarrativeState(
+            data.state,
+            data.emotion
+        );
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Unable to connect to ANI."
+        );
+
+    }
+
+
+    finally {
+
+        beginButton.disabled =
+            false;
+
+        beginButton.textContent =
+            "Begin My Story →";
+
+    }
+
+}
+
+
+// ==========================================================
+// DISPLAY STORY
+// ==========================================================
+
+function displayStory(
+    story,
+    choices
+) {
+
+    document
+        .getElementById(
+            "story-content"
+        )
+        .textContent = story;
+
+
+    const choicesContainer =
+        document.getElementById(
+            "choices"
+        );
+
+
+    choicesContainer.innerHTML =
+        "";
+
+
+    choices.forEach(
+        function(choice) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "choice-btn";
+
+
+            button.textContent =
+                choice;
+
+
+            button.onclick =
+                function() {
+
+                    continueStory(
+                        choice
+                    );
+
+                };
+
+
+            choicesContainer
+                .appendChild(button);
+
+        }
+    );
+
+}
+
+
+// ==========================================================
+// CONTINUE STORY
+// ==========================================================
+
+async function continueStory(
+    choice
+) {
+
+    const loading =
+        document.getElementById(
+            "loading"
+        );
+
+
+    const choicesContainer =
+        document.getElementById(
+            "choices"
+        );
+
+
+    loading.classList.remove(
+        "hidden"
+    );
+
+
+    choicesContainer.innerHTML =
+        "";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/continue-story",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        choice: choice
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            alert(
+                data.message
+            );
+
+            return;
+
+        }
+
+
+        currentStage =
+            data.stage;
+
+
+        updateStageIndicator();
+
+
+        displayStory(
+            data.story,
+            data.choices
+        );
+
+
+        updateNarrativeState(
+            data.state,
+            data.emotion
+        );
+
+
+        if (data.completed) {
+
+            showCompletion();
+
+        }
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Something went wrong while "
+            + "adapting the story."
+        );
+
+    }
+
+
+    finally {
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
+
+}
+
+
+// ==========================================================
+// UPDATE NARRATIVE STATE
+// ==========================================================
+
+function updateNarrativeState(
+    state,
+    emotion
+) {
+
+    if (!state) {
+        return;
+    }
+
+
+    // Display emotion
+
+    document
+        .getElementById(
+            "emotion-display"
+        )
+        .textContent = emotion;
+
+
+    // Values
+
+    updateStateValue(
+        "confidence",
+        state.confidence
+    );
+
+
+    updateStateValue(
+        "curiosity",
+        state.curiosity
+    );
+
+
+    updateStateValue(
+        "momentum",
+        state.momentum
+    );
+
+
+    updateStateValue(
+        "reflection",
+        state.reflection
+    );
+
+
+    updateStateValue(
+        "risk-taking",
+        state.risk_taking
+    );
+
+}
+
+
+// ==========================================================
+// UPDATE INDIVIDUAL STATE
+// ==========================================================
+
+function updateStateValue(
+    name,
+    value
+) {
+
+    const valueElement =
+        document.getElementById(
+            name + "-value"
+        );
+
+
+    const barElement =
+        document.getElementById(
+            name + "-bar"
+        );
+
+
+    if (!valueElement || !barElement) {
+        return;
+    }
+
+
+    valueElement.textContent =
+        value;
+
+
+    /*
+        State values can be negative.
+
+        We visually place the bar from
+        0 to 100 using a simple conversion.
+    */
+
+    let percentage =
+        50 + (value * 10);
+
+
+    percentage =
+        Math.max(
+            5,
+            Math.min(
+                100,
+                percentage
+            )
+        );
+
+
+    barElement.style.width =
+        percentage + "%";
+
+}
+
+
+// ==========================================================
+// STAGE INDICATOR
+// ==========================================================
+
+function updateStageIndicator() {
+
+    document
+        .getElementById(
+            "stage-indicator"
+        )
+        .textContent =
+        "Stage "
+        + currentStage
+        + " of 4";
+
+}
+
+
+// ==========================================================
+// COMPLETION
+// ==========================================================
+
+function showCompletion() {
+
+    document
+        .getElementById(
+            "choice-section"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+
+    document
+        .getElementById(
+            "completion-message"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+}
+
+
+// ==========================================================
+// RESTART
+// ==========================================================
+
+async function restartStory() {
+
+    try {
+
+        await fetch(
+            "/reset-story",
+            {
+                method: "POST"
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+    }
+
+
+    selectedEmotion = "";
+
+    currentStage = 1;
+
+
+    document
+        .getElementById(
+            "story-section"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+
+    document
+        .getElementById(
+            "emotion-section"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+
+    document
+        .getElementById(
+            "selected-emotion"
+        )
+        .textContent =
+        "Select an emotion to begin.";
+
+
+    document
+        .getElementById(
+            "begin-btn"
+        )
+        .disabled = true;
+
+
+    document
+        .getElementById(
+            "completion-message"
+        )
+        .classList.add(
+            "hidden"
+        );
+
+
+    document
+        .getElementById(
+            "choice-section"
+        )
+        .classList.remove(
+            "hidden"
+        );
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".emotion-btn"
+        );
+
+
+    buttons.forEach(
+        button => {
+
+            button.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    // Reset dashboard
+
+    updateNarrativeState(
+        {
+            confidence: 0,
+            curiosity: 0,
+            momentum: 0,
+            reflection: 0,
+            risk_taking: 0
+        },
+        "Emotion"
+    );
+
+
+    updateStageIndicator();
+
+}
+
+</script>
+
+</body>
+
+</html>
