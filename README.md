@@ -2,6 +2,8 @@
 
 > An experimental adaptive storytelling system that explores how narrative experiences can respond to a user's emotional state and decisions.
 
+![ANI Home Screen](images/ani-home.png)
+
 ## Overview
 
 **Adaptive Narrative Intelligence (ANI)** is an interactive storytelling prototype designed to explore a simple question:
