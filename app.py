@@ -3,94 +3,56 @@ from narrative_engine import NarrativeEngine
 
 app = Flask(__name__)
 
+# Required for Flask sessions
 app.secret_key = "ani-development-secret-key"
 
 engine = NarrativeEngine()
 
-
-# ============================================================
-# HOME
-# ============================================================
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
-# ============================================================
-# START STORY
-# ============================================================
-
-@app.route("/start-story", methods=["POST"])
+@app.route("/start", methods=["POST"])
 def start_story():
 
     data = request.get_json()
 
-    if not data:
+    emotion = data.get("emotion")
+
+    result = engine.start_story(emotion)
+
+    if result is None:
         return jsonify({
             "success": False,
-            "message": "No data received."
+            "error": "Invalid emotion selected."
         }), 400
 
-    emotion = data.get("emotion", "").strip()
-
-    if not emotion:
-        return jsonify({
-            "success": False,
-            "message": "Emotion is required."
-        }), 400
-
-    story_session = engine.start_story(emotion)
-
-    if story_session is None:
-        return jsonify({
-            "success": False,
-            "message": "Emotion not recognized."
-        }), 400
-
-    # Save the session
-    session["story_session"] = story_session["session"]
+    # Store the narrative session
+    session["story_session"] = result["session"]
 
     return jsonify({
         "success": True,
-        "story": story_session["story"],
-        "tone": story_session["tone"],
-        "choices": story_session["choices"],
-        "state": story_session["session"]["state"],
-        "stage": story_session["session"]["stage"],
-        "emotion": story_session["session"]["emotion"]
+        "story": result["story"],
+        "tone": result["tone"],
+        "choices": result["choices"]
     })
 
 
-# ============================================================
-# CONTINUE STORY
-# ============================================================
-
-@app.route("/continue-story", methods=["POST"])
-def continue_story():
+@app.route("/choose", methods=["POST"])
+def choose():
 
     data = request.get_json()
 
-    if not data:
-        return jsonify({
-            "success": False,
-            "message": "No data received."
-        }), 400
-
-    choice = data.get("choice", "").strip()
-
-    if not choice:
-        return jsonify({
-            "success": False,
-            "message": "Choice is required."
-        }), 400
+    choice = data.get("choice")
 
     story_session = session.get("story_session")
 
     if not story_session:
         return jsonify({
             "success": False,
-            "message": "No active story session."
+            "error": "No active story session."
         }), 400
 
     result = engine.adapt_story(
@@ -101,80 +63,52 @@ def continue_story():
     if result is None:
         return jsonify({
             "success": False,
-            "message": "Unable to continue the story."
+            "error": "Unable to process choice."
         }), 400
 
     # Save updated session
     session["story_session"] = result["session"]
 
-    return jsonify({
+    response = {
         "success": True,
         "story": result["story"],
         "tone": result["tone"],
         "choices": result["choices"],
-        "state": result["session"]["state"],
-        "stage": result["session"]["stage"],
-        "emotion": result["session"]["emotion"],
         "completed": result.get("completed", False)
-    })
+    }
+
+    # If the story has finished, include the journey summary
+    if result.get("completed", False):
+
+        summary = engine.get_journey_summary(
+            result["session"]
+        )
+
+        response["summary"] = summary
+
+    return jsonify(response)
 
 
-# ============================================================
-# GET CURRENT NARRATIVE STATE
-# ============================================================
-
-@app.route("/story-state", methods=["GET"])
-def story_state():
+@app.route("/journey-summary", methods=["GET"])
+def journey_summary():
 
     story_session = session.get("story_session")
 
     if not story_session:
         return jsonify({
             "success": False,
-            "message": "No active story session."
+            "error": "No journey found."
         }), 404
 
-    return jsonify({
-        "success": True,
-        "emotion": story_session["emotion"],
-        "stage": story_session["stage"],
-        "state": story_session["state"],
-        "choices": story_session["choices"]
-    })
-
-
-# ============================================================
-# RESET STORY
-# ============================================================
-
-@app.route("/reset-story", methods=["POST"])
-def reset_story():
-
-    session.pop("story_session", None)
+    summary = engine.get_journey_summary(
+        story_session
+    )
 
     return jsonify({
         "success": True,
-        "message": "Story session reset."
+        "summary": summary
     })
 
-
-# ============================================================
-# HEALTH CHECK
-# ============================================================
-
-@app.route("/health")
-def health():
-
-    return jsonify({
-        "status": "online",
-        "system": "Adaptive Narrative Intelligence",
-        "engine": "NarrativeEngine"
-    })
-
-
-# ============================================================
-# RUN
-# ============================================================
 
 if __name__ == "__main__":
     app.run(debug=True)
