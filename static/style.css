@@ -1462,3 +1462,165 @@ button:focus-visible {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* =========================================================
+   ANI ADAPTIVE INTELLIGENCE
+   ========================================================= */
+
+.adaptive-thinking {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 20px;
+
+    padding: 17px 20px;
+
+    border:
+        1px solid
+        rgba(129, 140, 248, 0.20);
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(99, 102, 241, 0.10),
+            rgba(168, 85, 247, 0.06)
+        );
+
+    animation:
+        thinkingReveal
+        0.35s
+        ease
+        both;
+}
+
+
+.thinking-orb {
+    position: relative;
+
+    width: 34px;
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(167, 139, 250, 0.30),
+            rgba(99, 102, 241, 0.08)
+        );
+
+    box-shadow:
+        0 0 25px
+        rgba(129, 140, 248, 0.25);
+}
+
+
+.thinking-orb span {
+    width: 4px;
+
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #c4b5fd;
+
+    animation:
+        thinkingPulse
+        1.2s
+        infinite
+        ease-in-out;
+}
+
+
+.thinking-orb span:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+
+.thinking-orb span:nth-child(3) {
+    animation-delay: 0.30s;
+}
+
+
+.thinking-content {
+    min-width: 0;
+}
+
+
+.thinking-content strong {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #ddd6fe;
+
+    font-size: 0.82rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+
+.thinking-content p {
+    color: #8f98af;
+
+    font-size: 0.78rem;
+}
+
+
+@keyframes thinkingPulse {
+
+    0%,
+    100% {
+        opacity: 0.25;
+
+        transform:
+            translateY(0)
+            scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            translateY(-3px)
+            scale(1);
+    }
+}
+
+
+@keyframes thinkingReveal {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}

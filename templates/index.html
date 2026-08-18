@@ -30,23 +30,18 @@
             </p>
 
             <h1>
-                Every story should respond to the person
-                experiencing it.
+                Every story should respond to the person experiencing it.
             </h1>
 
             <p class="intro">
-                Your emotions and decisions shape the journey.
-                Begin a story that evolves with you.
+                Choose your current emotional state and begin an adaptive
+                story shaped by your decisions.
             </p>
 
         </header>
 
 
         <section class="story-card">
-
-            <p class="eyebrow">
-                BEGIN YOUR JOURNEY
-            </p>
 
             <h2>
                 How are you feeling right now?
@@ -56,7 +51,6 @@
             <div class="emotion-grid">
 
                 <button
-                    type="button"
                     class="emotion-btn"
                     onclick="selectEmotion('Inspired')"
                 >
@@ -64,7 +58,6 @@
                 </button>
 
                 <button
-                    type="button"
                     class="emotion-btn"
                     onclick="selectEmotion('Curious')"
                 >
@@ -72,7 +65,6 @@
                 </button>
 
                 <button
-                    type="button"
                     class="emotion-btn"
                     onclick="selectEmotion('Confused')"
                 >
@@ -80,7 +72,6 @@
                 </button>
 
                 <button
-                    type="button"
                     class="emotion-btn"
                     onclick="selectEmotion('Unmotivated')"
                 >
@@ -88,7 +79,6 @@
                 </button>
 
                 <button
-                    type="button"
                     class="emotion-btn"
                     onclick="selectEmotion('Calm')"
                 >
@@ -96,7 +86,6 @@
                 </button>
 
                 <button
-                    type="button"
                     class="emotion-btn"
                     onclick="selectEmotion('Excited')"
                 >
@@ -109,14 +98,12 @@
             <div
                 id="selected-emotion"
                 class="selected-emotion"
-                aria-live="polite"
             >
                 Select an emotion to begin.
             </div>
 
 
             <button
-                type="button"
                 id="begin-btn"
                 class="begin-btn"
                 onclick="beginStory()"
@@ -147,11 +134,11 @@
             <div>
 
                 <p class="eyebrow">
-                    ADAPTIVE JOURNEY
+                    YOUR ADAPTIVE STORY
                 </p>
 
                 <h2 class="journey-title">
-                    Your Story
+                    Your Narrative Journey
                 </h2>
 
             </div>
@@ -163,7 +150,7 @@
                     STAGE
                 </span>
 
-                <strong id="stage-value">
+                <strong id="stage-number">
                     1
                 </strong>
 
@@ -172,7 +159,7 @@
         </div>
 
 
-        <!-- PROGRESS BAR -->
+        <!-- JOURNEY PROGRESS -->
 
         <div class="journey-progress-track">
 
@@ -184,22 +171,24 @@
         </div>
 
 
+        <!-- STORY LAYOUT -->
+
         <div class="story-layout">
 
             <!-- =================================================
-                 STORY
+                 MAIN STORY
                  ================================================= -->
 
             <div class="story-card story-main-card">
 
                 <div class="story-meta">
 
-                    <span id="emotion-indicator">
-                        Your emotional starting point
+                    <span>
+                        Adaptive Narrative
                     </span>
 
                     <span class="adaptive-indicator">
-                        ● ADAPTING
+                        ● SYSTEM ACTIVE
                     </span>
 
                 </div>
@@ -208,8 +197,8 @@
                 <div
                     id="story-text"
                     class="story-text"
-                    aria-live="polite"
-                ></div>
+                >
+                </div>
 
 
                 <div class="choice-heading">
@@ -228,7 +217,82 @@
                 <div
                     id="choice-container"
                     class="choice-container"
-                ></div>
+                >
+                </div>
+
+
+                <!-- =================================================
+                     ANI THINKING
+                     ================================================= -->
+
+                <div
+                    id="adaptive-thinking"
+                    class="adaptive-thinking"
+                    style="display: none;"
+                >
+
+                    <div class="thinking-orb">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+
+                    <div class="thinking-content">
+
+                        <strong>
+                            ANI is adapting
+                        </strong>
+
+                        <p id="thinking-message">
+                            Analyzing your decision...
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     NARRATIVE ADAPTATION RESULT
+                     ================================================= -->
+
+                <div
+                    id="adaptation-result"
+                    class="adaptation-result"
+                    style="display: none;"
+                >
+
+                    <div class="adaptation-header">
+
+                        <span class="adaptation-icon">
+                            ✦
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Narrative Adaptation
+                            </strong>
+
+                            <p>
+                                Your decision influenced the narrative state.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="adaptation-changes"
+                        class="adaptation-changes"
+                    >
+                    </div>
+
+                </div>
 
             </div>
 
@@ -246,9 +310,8 @@
                     </p>
 
                     <p class="state-description">
-                        Your choices continuously influence
-                        the direction and characteristics
-                        of your story.
+                        Your decisions continuously influence these
+                        narrative characteristics.
                     </p>
 
                 </div>
@@ -416,7 +479,7 @@
 
 
     <!-- =====================================================
-         SUMMARY SECTION
+         JOURNEY SUMMARY
          ===================================================== -->
 
     <section
@@ -431,22 +494,26 @@
                 JOURNEY COMPLETE
             </p>
 
+
             <h2>
                 Your Narrative Journey
             </h2>
 
+
             <p class="summary-intro">
-                Your decisions shaped this journey.
-                Here's how your narrative evolved.
+                Your decisions shaped the path, state and ending
+                of this adaptive experience.
             </p>
+
 
             <div
                 id="summary-content"
                 class="summary-content"
-            ></div>
+            >
+            </div>
+
 
             <button
-                type="button"
                 class="begin-btn"
                 onclick="restartJourney()"
             >
@@ -463,14 +530,16 @@
 <script>
 
 /* =========================================================
-   ANI — ADAPTIVE NARRATIVE CONTROLLER
+   GLOBAL VARIABLES
    ========================================================= */
 
 let selectedEmotion = "";
 
 let currentStage = 1;
 
-const MAX_STAGES = 5;
+let thinkingInterval = null;
+
+let previousNarrativeState = null;
 
 
 /* =========================================================
@@ -481,36 +550,49 @@ function selectEmotion(emotion) {
 
     selectedEmotion = emotion;
 
-    document
-        .querySelectorAll(".emotion-grid .emotion-btn")
-        .forEach(function(button) {
 
-            button.classList.remove("selected");
-
-        });
+    const emotionButtons =
+        document.querySelectorAll(
+            "#landing-section .emotion-btn"
+        );
 
 
-    document
-        .querySelectorAll(".emotion-grid .emotion-btn")
-        .forEach(function(button) {
+    emotionButtons.forEach(
+        function(button) {
+
+            button.classList.remove(
+                "selected"
+            );
+
+        }
+    );
+
+
+    emotionButtons.forEach(
+        function(button) {
 
             if (
                 button.textContent
                     .toLowerCase()
-                    .includes(emotion.toLowerCase())
+                    .includes(
+                        emotion.toLowerCase()
+                    )
             ) {
 
-                button.classList.add("selected");
+                button.classList.add(
+                    "selected"
+                );
 
             }
 
-        });
+        }
+    );
 
 
     document.getElementById(
         "selected-emotion"
     ).textContent =
-        "Your starting emotional state: " + emotion;
+        "You selected: " + emotion;
 
 
     document.getElementById(
@@ -531,34 +613,40 @@ async function beginStory() {
 
 
     const beginButton =
-        document.getElementById("begin-btn");
+        document.getElementById(
+            "begin-btn"
+        );
 
 
     beginButton.disabled = true;
 
     beginButton.textContent =
-        "Creating your story...";
+        "Preparing Your Story...";
 
 
     try {
 
-        const response = await fetch(
-            "/start",
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                "/start",
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify({
-                    emotion: selectedEmotion
-                })
-            }
-        );
+                    body: JSON.stringify({
+                        emotion:
+                            selectedEmotion
+                    })
+                }
+            );
 
 
-        const data = await response.json();
+        const data =
+            await response.json();
 
 
         if (!data.success) {
@@ -567,6 +655,7 @@ async function beginStory() {
                 data.error ||
                 "Unable to start the story."
             );
+
 
             beginButton.disabled = false;
 
@@ -579,14 +668,7 @@ async function beginStory() {
 
         currentStage = 1;
 
-        updateJourneyProgress();
-
-
-        document.getElementById(
-            "emotion-indicator"
-        ).textContent =
-            "Starting emotion: " +
-            selectedEmotion;
+        previousNarrativeState = null;
 
 
         document.getElementById(
@@ -597,6 +679,11 @@ async function beginStory() {
         document.getElementById(
             "story-section"
         ).style.display = "block";
+
+
+        document.getElementById(
+            "summary-section"
+        ).style.display = "none";
 
 
         displayStory(
@@ -610,10 +697,12 @@ async function beginStory() {
         );
 
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
+        updateStageDisplay(
+            currentStage
+        );
+
+
+        hideAdaptationResult();
 
     }
 
@@ -621,9 +710,11 @@ async function beginStory() {
 
         console.error(error);
 
+
         alert(
             "Unable to connect to the ANI story engine."
         );
+
 
         beginButton.disabled = false;
 
@@ -637,24 +728,30 @@ async function beginStory() {
    DISPLAY STORY
    ========================================================= */
 
-function displayStory(story, choices) {
+function displayStory(
+    story,
+    choices
+) {
 
-    const storyText =
-        document.getElementById("story-text");
+    const storyElement =
+        document.getElementById(
+            "story-text"
+        );
 
 
-    storyText.classList.remove(
+    storyElement.classList.remove(
         "story-reveal-active"
     );
 
 
-    void storyText.offsetWidth;
+    void storyElement.offsetWidth;
 
 
-    storyText.textContent = story;
+    storyElement.textContent =
+        story;
 
 
-    storyText.classList.add(
+    storyElement.classList.add(
         "story-reveal-active"
     );
 
@@ -668,38 +765,52 @@ function displayStory(story, choices) {
     container.innerHTML = "";
 
 
-    if (!choices || choices.length === 0) {
+    if (
+        !choices ||
+        choices.length === 0
+    ) {
+
         return;
     }
 
 
-    choices.forEach(function(choice, index) {
+    choices.forEach(
+        function(choice, index) {
 
-        const button =
-            document.createElement("button");
-
-
-        button.type = "button";
-
-        button.className = "emotion-btn";
-
-        button.textContent = choice;
+            const button =
+                document.createElement(
+                    "button"
+                );
 
 
-        button.style.animationDelay =
-            (index * 0.08) + "s";
+            button.className =
+                "emotion-btn";
 
 
-        button.onclick = function() {
-
-            makeChoice(choice);
-
-        };
+            button.textContent =
+                choice;
 
 
-        container.appendChild(button);
+            button.style.animationDelay =
+                (index * 0.08) + "s";
 
-    });
+
+            button.onclick =
+                function() {
+
+                    makeChoice(
+                        choice
+                    );
+
+                };
+
+
+            container.appendChild(
+                button
+            );
+
+        }
+    );
 }
 
 
@@ -709,41 +820,59 @@ function displayStory(story, choices) {
 
 async function makeChoice(choice) {
 
+    previousNarrativeState =
+        getCurrentNarrativeState();
+
+
+    hideAdaptationResult();
+
+
+    showAdaptiveThinking();
+
+
     const choiceButtons =
         document.querySelectorAll(
             "#choice-container .emotion-btn"
         );
 
 
-    choiceButtons.forEach(function(button) {
+    choiceButtons.forEach(
+        function(button) {
 
-        button.disabled = true;
+            button.disabled = true;
 
-    });
+        }
+    );
 
 
     try {
 
-        const response = await fetch(
-            "/choose",
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                "/choose",
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-                body: JSON.stringify({
-                    choice: choice
-                })
-            }
-        );
+                    body: JSON.stringify({
+                        choice: choice
+                    })
+                }
+            );
 
 
-        const data = await response.json();
+        const data =
+            await response.json();
 
 
         if (!data.success) {
+
+            hideAdaptiveThinking();
+
 
             alert(
                 data.error ||
@@ -759,18 +888,31 @@ async function makeChoice(choice) {
                 }
             );
 
+
             return;
         }
-
-
-        currentStage++;
-
-        updateJourneyProgress();
 
 
         updateNarrativeState(
             data.state
         );
+
+
+        showAdaptationResult(
+            previousNarrativeState,
+            data.state
+        );
+
+
+        currentStage++;
+
+
+        updateStageDisplay(
+            currentStage
+        );
+
+
+        hideAdaptiveThinking();
 
 
         if (data.completed) {
@@ -789,19 +931,15 @@ async function makeChoice(choice) {
             data.choices
         );
 
-
-        document.getElementById(
-            "story-text"
-        ).scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
-
     }
 
     catch (error) {
 
         console.error(error);
+
+
+        hideAdaptiveThinking();
+
 
         alert(
             "Something went wrong while processing your choice."
@@ -820,42 +958,391 @@ async function makeChoice(choice) {
 
 
 /* =========================================================
-   JOURNEY PROGRESS
+   GET CURRENT NARRATIVE STATE
    ========================================================= */
 
-function updateJourneyProgress() {
+function getCurrentNarrativeState() {
 
-    const stage =
-        document.getElementById("stage-value");
+    return {
+
+        confidence:
+            Number(
+                document.getElementById(
+                    "confidence-value"
+                )?.textContent || 0
+            ),
+
+        curiosity:
+            Number(
+                document.getElementById(
+                    "curiosity-value"
+                )?.textContent || 0
+            ),
+
+        momentum:
+            Number(
+                document.getElementById(
+                    "momentum-value"
+                )?.textContent || 0
+            ),
+
+        reflection:
+            Number(
+                document.getElementById(
+                    "reflection-value"
+                )?.textContent || 0
+            ),
+
+        risk_taking:
+            Number(
+                document.getElementById(
+                    "risk-taking-value"
+                )?.textContent || 0
+            )
+
+    };
+}
 
 
-    const progress =
+/* =========================================================
+   SHOW NARRATIVE ADAPTATION
+   ========================================================= */
+
+function showAdaptationResult(
+    oldState,
+    newState
+) {
+
+    if (!oldState || !newState) {
+        return;
+    }
+
+
+    const container =
+        document.getElementById(
+            "adaptation-changes"
+        );
+
+
+    const panel =
+        document.getElementById(
+            "adaptation-result"
+        );
+
+
+    if (!container || !panel) {
+        return;
+    }
+
+
+    const traits = [
+
+        {
+            key: "confidence",
+            label: "Confidence"
+        },
+
+        {
+            key: "curiosity",
+            label: "Curiosity"
+        },
+
+        {
+            key: "momentum",
+            label: "Momentum"
+        },
+
+        {
+            key: "reflection",
+            label: "Reflection"
+        },
+
+        {
+            key: "risk_taking",
+            label: "Risk-taking"
+        }
+
+    ];
+
+
+    container.innerHTML = "";
+
+
+    traits.forEach(
+        function(trait) {
+
+            const oldValue =
+                Number(
+                    oldState[
+                        trait.key
+                    ] ?? 0
+                );
+
+
+            const newValue =
+                Number(
+                    newState[
+                        trait.key
+                    ] ?? 0
+                );
+
+
+            const difference =
+                newValue -
+                oldValue;
+
+
+            let className =
+                "neutral";
+
+
+            let displayChange =
+                "0";
+
+
+            if (difference > 0) {
+
+                className =
+                    "positive";
+
+                displayChange =
+                    "+" +
+                    difference;
+
+            }
+
+            else if (
+                difference < 0
+            ) {
+
+                className =
+                    "negative";
+
+                displayChange =
+                    difference;
+
+            }
+
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+
+            element.className =
+                "adaptation-change " +
+                className;
+
+
+            element.innerHTML = `
+
+                <span>
+                    ${trait.label}
+                </span>
+
+                <strong>
+                    ${displayChange}
+                </strong>
+
+            `;
+
+
+            container.appendChild(
+                element
+            );
+
+        }
+    );
+
+
+    panel.style.display =
+        "block";
+}
+
+
+/* =========================================================
+   HIDE ADAPTATION RESULT
+   ========================================================= */
+
+function hideAdaptationResult() {
+
+    const panel =
+        document.getElementById(
+            "adaptation-result"
+        );
+
+
+    if (panel) {
+
+        panel.style.display =
+            "none";
+
+    }
+}
+
+
+/* =========================================================
+   ANI THINKING
+   ========================================================= */
+
+function showAdaptiveThinking() {
+
+    const thinking =
+        document.getElementById(
+            "adaptive-thinking"
+        );
+
+
+    const message =
+        document.getElementById(
+            "thinking-message"
+        );
+
+
+    if (!thinking) {
+        return;
+    }
+
+
+    thinking.style.display =
+        "flex";
+
+
+    const messages = [
+
+        "Analyzing your decision...",
+
+        "Updating your narrative state...",
+
+        "Evaluating possible story paths...",
+
+        "Adapting the next experience..."
+
+    ];
+
+
+    let index = 0;
+
+
+    message.textContent =
+        messages[index];
+
+
+    if (thinkingInterval) {
+
+        clearInterval(
+            thinkingInterval
+        );
+
+    }
+
+
+    thinkingInterval =
+        setInterval(
+            function() {
+
+                index++;
+
+
+                if (
+                    index >=
+                    messages.length
+                ) {
+
+                    clearInterval(
+                        thinkingInterval
+                    );
+
+                    thinkingInterval =
+                        null;
+
+                    return;
+                }
+
+
+                message.textContent =
+                    messages[index];
+
+            },
+            550
+        );
+}
+
+
+/* =========================================================
+   HIDE ANI THINKING
+   ========================================================= */
+
+function hideAdaptiveThinking() {
+
+    const thinking =
+        document.getElementById(
+            "adaptive-thinking"
+        );
+
+
+    if (thinkingInterval) {
+
+        clearInterval(
+            thinkingInterval
+        );
+
+        thinkingInterval =
+            null;
+    }
+
+
+    if (!thinking) {
+        return;
+    }
+
+
+    thinking.style.display =
+        "none";
+}
+
+
+/* =========================================================
+   UPDATE STAGE
+   ========================================================= */
+
+function updateStageDisplay(stage) {
+
+    const stageElement =
+        document.getElementById(
+            "stage-number"
+        );
+
+
+    if (stageElement) {
+
+        stageElement.textContent =
+            stage;
+    }
+
+
+    const progressBar =
         document.getElementById(
             "journey-progress-bar"
         );
 
 
-    if (!stage || !progress) {
-        return;
+    if (progressBar) {
+
+        const percentage =
+            Math.min(
+                100,
+                Math.max(
+                    8,
+                    stage * 16
+                )
+            );
+
+
+        progressBar.style.width =
+            percentage + "%";
     }
-
-
-    stage.textContent = currentStage;
-
-
-    let percentage =
-        (currentStage / MAX_STAGES) * 100;
-
-
-    percentage =
-        Math.max(
-            8,
-            Math.min(100, percentage)
-        );
-
-
-    progress.style.width =
-        percentage + "%";
 }
 
 
@@ -901,13 +1388,24 @@ function updateNarrativeState(state) {
 
 
     const dominantTrait =
-        getDominantTrait(state);
+        getDominantTrait(
+            state
+        );
 
 
-    document.getElementById(
-        "dominant-trait"
-    ).textContent =
-        formatTraitName(dominantTrait);
+    const dominantElement =
+        document.getElementById(
+            "dominant-trait"
+        );
+
+
+    if (dominantElement) {
+
+        dominantElement.textContent =
+            formatTraitName(
+                dominantTrait
+            );
+    }
 }
 
 
@@ -915,7 +1413,10 @@ function updateNarrativeState(state) {
    UPDATE STATE METRIC
    ========================================================= */
 
-function updateStateMetric(name, value) {
+function updateStateMetric(
+    name,
+    value
+) {
 
     const valueElement =
         document.getElementById(
@@ -929,12 +1430,26 @@ function updateStateMetric(name, value) {
         );
 
 
-    if (!valueElement || !barElement) {
+    if (
+        !valueElement ||
+        !barElement
+    ) {
+
         return;
     }
 
 
-    valueElement.textContent = value;
+    if (
+        value === undefined ||
+        value === null
+    ) {
+
+        value = 0;
+    }
+
+
+    valueElement.textContent =
+        value;
 
 
     const minimum = -5;
@@ -952,7 +1467,10 @@ function updateStateMetric(name, value) {
     percentage =
         Math.max(
             0,
-            Math.min(100, percentage)
+            Math.min(
+                100,
+                percentage
+            )
         );
 
 
@@ -962,36 +1480,55 @@ function updateStateMetric(name, value) {
 
 
 /* =========================================================
-   DOMINANT TRAIT
+   GET DOMINANT TRAIT
    ========================================================= */
 
 function getDominantTrait(state) {
 
-    let dominant = "confidence";
+    let dominant =
+        "confidence";
 
-    let highest = state.confidence;
+
+    let highest =
+        state.confidence ?? 0;
 
 
     const traits = [
+
         "confidence",
+
         "curiosity",
+
         "momentum",
+
         "reflection",
+
         "risk_taking"
+
     ];
 
 
-    traits.forEach(function(trait) {
+    traits.forEach(
+        function(trait) {
 
-        if (state[trait] > highest) {
+            const value =
+                state[trait] ?? 0;
 
-            highest = state[trait];
 
-            dominant = trait;
+            if (
+                value >
+                highest
+            ) {
+
+                highest =
+                    value;
+
+                dominant =
+                    trait;
+            }
 
         }
-
-    });
+    );
 
 
     return dominant;
@@ -999,35 +1536,45 @@ function getDominantTrait(state) {
 
 
 /* =========================================================
-   FORMAT TRAIT
+   FORMAT TRAIT NAME
    ========================================================= */
 
 function formatTraitName(trait) {
 
     const names = {
 
-        confidence: "Confidence",
+        confidence:
+            "Confidence",
 
-        curiosity: "Curiosity",
+        curiosity:
+            "Curiosity",
 
-        momentum: "Momentum",
+        momentum:
+            "Momentum",
 
-        reflection: "Reflection",
+        reflection:
+            "Reflection",
 
-        risk_taking: "Risk-taking"
+        risk_taking:
+            "Risk-taking"
 
     };
 
 
-    return names[trait] || trait;
+    return (
+        names[trait] ||
+        trait
+    );
 }
 
 
 /* =========================================================
-   STATE HISTORY
+   BUILD STATE HISTORY
    ========================================================= */
 
-function buildStateHistoryHTML(stateHistory) {
+function buildStateHistoryHTML(
+    stateHistory
+) {
 
     if (
         !stateHistory ||
@@ -1036,8 +1583,15 @@ function buildStateHistoryHTML(stateHistory) {
 
         return `
             <div class="journey-details">
-                <h3>State History</h3>
-                <p>No state history recorded.</p>
+
+                <h3>
+                    State History
+                </h3>
+
+                <p>
+                    No state history recorded.
+                </p>
+
             </div>
         `;
     }
@@ -1047,11 +1601,13 @@ function buildStateHistoryHTML(stateHistory) {
 
         <div class="journey-details state-history">
 
-            <h3>State History</h3>
+            <h3>
+                State History
+            </h3>
 
             <p class="history-description">
-                Your narrative state evolved as you
-                moved through the journey.
+                Your narrative state evolved as you moved
+                through the journey.
             </p>
 
             <div class="history-list">
@@ -1059,87 +1615,100 @@ function buildStateHistoryHTML(stateHistory) {
     `;
 
 
-    stateHistory.forEach(function(snapshot) {
+    stateHistory.forEach(
+        function(snapshot) {
 
-        const state =
-            snapshot.state || {};
+            const state =
+                snapshot.state ||
+                {};
 
 
-        html += `
+            html += `
 
-            <div class="history-stage">
+                <div class="history-stage">
 
-                <div class="history-stage-header">
+                    <div class="history-stage-header">
 
-                    <span>
-                        Stage ${snapshot.stage}
-                    </span>
+                        <span>
+                            Stage ${snapshot.stage}
+                        </span>
+
+                    </div>
+
+
+                    <div class="history-grid">
+
+                        <div class="history-metric">
+
+                            <span>
+                                Confidence
+                            </span>
+
+                            <strong>
+                                ${state.confidence ?? 0}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="history-metric">
+
+                            <span>
+                                Curiosity
+                            </span>
+
+                            <strong>
+                                ${state.curiosity ?? 0}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="history-metric">
+
+                            <span>
+                                Momentum
+                            </span>
+
+                            <strong>
+                                ${state.momentum ?? 0}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="history-metric">
+
+                            <span>
+                                Reflection
+                            </span>
+
+                            <strong>
+                                ${state.reflection ?? 0}
+                            </strong>
+
+                        </div>
+
+
+                        <div class="history-metric">
+
+                            <span>
+                                Risk-taking
+                            </span>
+
+                            <strong>
+                                ${state.risk_taking ?? 0}
+                            </strong>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
-
-                <div class="history-grid">
-
-                    <div class="history-metric">
-
-                        <span>Confidence</span>
-
-                        <strong>
-                            ${state.confidence ?? 0}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="history-metric">
-
-                        <span>Curiosity</span>
-
-                        <strong>
-                            ${state.curiosity ?? 0}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="history-metric">
-
-                        <span>Momentum</span>
-
-                        <strong>
-                            ${state.momentum ?? 0}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="history-metric">
-
-                        <span>Reflection</span>
-
-                        <strong>
-                            ${state.reflection ?? 0}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="history-metric">
-
-                        <span>Risk-taking</span>
-
-                        <strong>
-                            ${state.risk_taking ?? 0}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        `;
-    });
+            `;
+        }
+    );
 
 
     html += `
@@ -1159,7 +1728,16 @@ function buildStateHistoryHTML(stateHistory) {
    SHOW SUMMARY
    ========================================================= */
 
-function showSummary(ending, summary) {
+function showSummary(
+    ending,
+    summary
+) {
+
+    hideAdaptiveThinking();
+
+
+    hideAdaptationResult();
+
 
     document.getElementById(
         "story-section"
@@ -1178,48 +1756,73 @@ function showSummary(ending, summary) {
 
 
     const decisions =
-        summary.decisions || [];
+        summary.decisions ||
+        [];
 
 
     const finalState =
-        summary.final_state || {};
+        summary.final_state ||
+        {};
 
 
     let decisionHTML = `
+
         <div class="journey-details">
-            <h3>Your Decisions</h3>
+
+            <h3>
+                Your Decisions
+            </h3>
+
     `;
 
 
-    if (decisions.length === 0) {
+    if (
+        decisions.length === 0
+    ) {
 
-        decisionHTML +=
-            "<p>No decisions recorded.</p>";
+        decisionHTML += `
+
+            <p>
+                No decisions recorded.
+            </p>
+
+        `;
 
     }
 
     else {
 
-        decisionHTML += "<ol>";
+        decisionHTML += `
+            <ol>
+        `;
 
 
-        decisions.forEach(function(decision) {
+        decisions.forEach(
+            function(decision) {
 
-            decisionHTML += `
-                <li>
-                    Stage ${decision.stage}:
-                    ${decision.choice}
-                </li>
-            `;
+                decisionHTML += `
 
-        });
+                    <li>
+                        Stage
+                        ${decision.stage}:
+                        ${decision.choice}
+                    </li>
+
+                `;
+
+            }
+        );
 
 
-        decisionHTML += "</ol>";
+        decisionHTML += `
+            </ol>
+        `;
     }
 
 
-    decisionHTML += "</div>";
+    decisionHTML += `
+        </div>
+    `;
 
 
     const stateHistoryHTML =
@@ -1230,9 +1833,13 @@ function showSummary(ending, summary) {
 
     content.innerHTML = `
 
+        <!-- ENDING -->
+
         <div class="ending">
 
-            <h3>Your Ending</h3>
+            <h3>
+                Your Ending
+            </h3>
 
             <p>
                 ${ending}
@@ -1241,54 +1848,94 @@ function showSummary(ending, summary) {
         </div>
 
 
+        <!-- JOURNEY DETAILS -->
+
         <div class="journey-details">
 
-            <h3>Journey Details</h3>
+            <h3>
+                Journey Details
+            </h3>
+
 
             <p>
-                <strong>Starting emotion:</strong>
+                <strong>
+                    Starting emotion:
+                </strong>
+
                 ${summary.starting_emotion}
             </p>
 
+
             <p>
-                <strong>Dominant trait:</strong>
+                <strong>
+                    Dominant trait:
+                </strong>
+
                 ${summary.dominant_trait}
             </p>
 
+
             <p>
-                <strong>Stages completed:</strong>
+                <strong>
+                    Stages completed:
+                </strong>
+
                 ${summary.stages_completed}
             </p>
 
         </div>
 
 
+        <!-- FINAL STATE -->
+
         <div class="journey-details">
 
-            <h3>Final Narrative State</h3>
+            <h3>
+                Final Narrative State
+            </h3>
+
 
             <p>
-                <strong>Confidence:</strong>
+                <strong>
+                    Confidence:
+                </strong>
+
                 ${finalState.confidence ?? 0}
             </p>
 
+
             <p>
-                <strong>Curiosity:</strong>
+                <strong>
+                    Curiosity:
+                </strong>
+
                 ${finalState.curiosity ?? 0}
             </p>
 
+
             <p>
-                <strong>Momentum:</strong>
+                <strong>
+                    Momentum:
+                </strong>
+
                 ${finalState.momentum ?? 0}
             </p>
 
+
             <p>
-                <strong>Reflection:</strong>
+                <strong>
+                    Reflection:
+                </strong>
+
                 ${finalState.reflection ?? 0}
             </p>
 
+
             <p>
-                <strong>Risk-taking:</strong>
+                <strong>
+                    Risk-taking:
+                </strong>
+
                 ${finalState.risk_taking ?? 0}
             </p>
 
@@ -1296,6 +1943,7 @@ function showSummary(ending, summary) {
 
 
         ${stateHistoryHTML}
+
 
         ${decisionHTML}
 
@@ -1323,7 +1971,6 @@ async function restartJourney() {
     catch (error) {
 
         console.error(error);
-
     }
 
 
@@ -1331,18 +1978,13 @@ async function restartJourney() {
 
     currentStage = 1;
 
+    previousNarrativeState =
+        null;
 
-    document
-        .querySelectorAll(
-            ".emotion-grid .emotion-btn"
-        )
-        .forEach(function(button) {
 
-            button.classList.remove(
-                "selected"
-            );
+    hideAdaptiveThinking();
 
-        });
+    hideAdaptationResult();
 
 
     document.getElementById(
@@ -1372,67 +2014,91 @@ async function restartJourney() {
         );
 
 
-    beginButton.disabled = true;
+    beginButton.disabled =
+        true;
+
 
     beginButton.textContent =
         "Begin My Story →";
 
 
-    updateJourneyProgress();
+    document
+        .querySelectorAll(
+            "#landing-section .emotion-btn"
+        )
+        .forEach(
+            function(button) {
+
+                button.classList.remove(
+                    "selected"
+                );
+
+            }
+        );
+
 
     resetNarrativeState();
 
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    updateStageDisplay(
+        currentStage
+    );
 }
 
 
 /* =========================================================
-   RESET NARRATIVE STATE
+   RESET NARRATIVE STATE DISPLAY
    ========================================================= */
 
 function resetNarrativeState() {
 
     const traits = [
+
         "confidence",
+
         "curiosity",
+
         "momentum",
+
         "reflection",
+
         "risk-taking"
+
     ];
 
 
-    traits.forEach(function(trait) {
+    traits.forEach(
+        function(trait) {
 
-        const value =
-            document.getElementById(
-                trait + "-value"
-            );
-
-
-        const bar =
-            document.getElementById(
-                trait + "-bar"
-            );
+            const value =
+                document.getElementById(
+                    trait + "-value"
+                );
 
 
-        if (value) {
+            const bar =
+                document.getElementById(
+                    trait + "-bar"
+                );
 
-            value.textContent = "0";
+
+            if (value) {
+
+                value.textContent =
+                    "0";
+
+            }
+
+
+            if (bar) {
+
+                bar.style.width =
+                    "33%";
+
+            }
 
         }
-
-
-        if (bar) {
-
-            bar.style.width = "33%";
-
-        }
-
-    });
+    );
 
 
     const dominant =
@@ -1443,7 +2109,8 @@ function resetNarrativeState() {
 
     if (dominant) {
 
-        dominant.textContent = "—";
+        dominant.textContent =
+            "—";
 
     }
 }
@@ -1457,7 +2124,9 @@ document.addEventListener(
     "DOMContentLoaded",
     function() {
 
-        updateJourneyProgress();
+        updateStageDisplay(
+            currentStage
+        );
 
     }
 );
