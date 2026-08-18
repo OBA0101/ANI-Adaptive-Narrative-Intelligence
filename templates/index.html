@@ -2,20 +2,36 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ANI | Adaptive Narrative Intelligence</title>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="ANI — Adaptive Narrative Intelligence. Stories that respond to you."
+    >
+
+    <title>
+        ANI | Adaptive Narrative Intelligence
+    </title>
 
     <link
         rel="stylesheet"
         href="{{ url_for('static', filename='style.css') }}"
     >
+
 </head>
+
 
 <body>
 
+
 <main class="container">
+
 
     <!-- =====================================================
          LANDING SECTION
@@ -23,32 +39,182 @@
 
     <section id="landing-section">
 
+
+        <!-- =================================================
+             ANI BRAND
+             ================================================= -->
+
+        <div class="ani-brand">
+
+            <div class="ani-logo">
+                ANI
+            </div>
+
+            <div class="ani-brand-text">
+
+                <strong>
+                    Adaptive Narrative Intelligence
+                </strong>
+
+                <span>
+                    Stories that respond to you.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SYSTEM STATUS
+             ================================================= -->
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            <span>
+                ADAPTIVE ENGINE ACTIVE
+            </span>
+
+        </div>
+
+
+        <!-- =================================================
+             HERO
+             ================================================= -->
+
         <header class="hero">
 
             <p class="eyebrow">
-                ADAPTIVE NARRATIVE INTELLIGENCE
+                A NEW KIND OF STORYTELLING
             </p>
+
 
             <h1>
                 Every story should respond to the person experiencing it.
             </h1>
 
+
             <p class="intro">
-                Choose your current emotional state and begin an adaptive
-                story shaped by your decisions.
+
+                ANI creates an evolving narrative experience where
+                your emotional state and decisions influence how
+                the story unfolds.
+
             </p>
 
         </header>
 
 
+        <!-- =================================================
+             HOW ANI WORKS
+             ================================================= -->
+
+        <div class="how-it-works">
+
+
+            <div class="how-step">
+
+                <span class="step-number">
+                    01
+                </span>
+
+                <div>
+
+                    <strong>
+                        Start with emotion
+                    </strong>
+
+                    <p>
+                        Tell ANI how you feel right now.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="how-step">
+
+                <span class="step-number">
+                    02
+                </span>
+
+                <div>
+
+                    <strong>
+                        Make decisions
+                    </strong>
+
+                    <p>
+                        Your choices shape the direction of the story.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="how-step">
+
+                <span class="step-number">
+                    03
+                </span>
+
+                <div>
+
+                    <strong>
+                        Watch it adapt
+                    </strong>
+
+                    <p>
+                        ANI continuously updates the narrative state.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             EMOTION SELECTION CARD
+             ================================================= -->
+
         <section class="story-card">
 
-            <h2>
-                How are you feeling right now?
-            </h2>
 
+            <div class="card-heading">
+
+                <p class="eyebrow">
+                    BEGIN YOUR JOURNEY
+                </p>
+
+
+                <h2>
+                    How are you feeling right now?
+                </h2>
+
+
+                <p class="card-description">
+
+                    Your starting emotion becomes the first signal
+                    used by the adaptive narrative system.
+
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 EMOTION GRID
+                 ================================================= -->
 
             <div class="emotion-grid">
+
 
                 <button
                     class="emotion-btn"
@@ -57,12 +223,14 @@
                     ✨ Inspired
                 </button>
 
+
                 <button
                     class="emotion-btn"
                     onclick="selectEmotion('Curious')"
                 >
                     🔎 Curious
                 </button>
+
 
                 <button
                     class="emotion-btn"
@@ -71,12 +239,14 @@
                     💭 Confused
                 </button>
 
+
                 <button
                     class="emotion-btn"
                     onclick="selectEmotion('Unmotivated')"
                 >
                     🌧️ Unmotivated
                 </button>
+
 
                 <button
                     class="emotion-btn"
@@ -85,6 +255,7 @@
                     🌿 Calm
                 </button>
 
+
                 <button
                     class="emotion-btn"
                     onclick="selectEmotion('Excited')"
@@ -92,8 +263,13 @@
                     🚀 Excited
                 </button>
 
+
             </div>
 
+
+            <!-- =================================================
+                 SELECTED EMOTION
+                 ================================================= -->
 
             <div
                 id="selected-emotion"
@@ -102,6 +278,10 @@
                 Select an emotion to begin.
             </div>
 
+
+            <!-- =================================================
+                 BEGIN BUTTON
+                 ================================================= -->
 
             <button
                 id="begin-btn"
@@ -112,7 +292,34 @@
                 Begin My Story →
             </button>
 
+
         </section>
+
+
+        <!-- =================================================
+             LANDING FOOTER
+             ================================================= -->
+
+        <div class="landing-footer">
+
+            <span>
+                YOUR DECISIONS
+            </span>
+
+            <span class="footer-line"></span>
+
+            <span>
+                SHAPE THE NARRATIVE
+            </span>
+
+            <span class="footer-line"></span>
+
+            <span>
+                CHANGE THE OUTCOME
+            </span>
+
+        </div>
+
 
     </section>
 
@@ -127,15 +334,20 @@
         style="display: none;"
     >
 
-        <!-- STORY HEADER -->
+
+        <!-- =================================================
+             STORY HEADER
+             ================================================= -->
 
         <div class="story-topbar">
+
 
             <div>
 
                 <p class="eyebrow">
                     YOUR ADAPTIVE STORY
                 </p>
+
 
                 <h2 class="journey-title">
                     Your Narrative Journey
@@ -156,10 +368,13 @@
 
             </div>
 
+
         </div>
 
 
-        <!-- JOURNEY PROGRESS -->
+        <!-- =================================================
+             JOURNEY PROGRESS
+             ================================================= -->
 
         <div class="journey-progress-track">
 
@@ -171,9 +386,12 @@
         </div>
 
 
-        <!-- STORY LAYOUT -->
+        <!-- =================================================
+             STORY LAYOUT
+             ================================================= -->
 
         <div class="story-layout">
+
 
             <!-- =================================================
                  MAIN STORY
@@ -181,11 +399,13 @@
 
             <div class="story-card story-main-card">
 
+
                 <div class="story-meta">
 
                     <span>
                         Adaptive Narrative
                     </span>
+
 
                     <span class="adaptive-indicator">
                         ● SYSTEM ACTIVE
@@ -206,6 +426,7 @@
                     <p class="eyebrow">
                         YOUR DECISION
                     </p>
+
 
                     <p>
                         Choose what happens next.
@@ -231,6 +452,7 @@
                     style="display: none;"
                 >
 
+
                     <div class="thinking-orb">
 
                         <span></span>
@@ -246,17 +468,19 @@
                             ANI is adapting
                         </strong>
 
+
                         <p id="thinking-message">
                             Analyzing your decision...
                         </p>
 
                     </div>
 
+
                 </div>
 
 
                 <!-- =================================================
-                     NARRATIVE ADAPTATION RESULT
+                     NARRATIVE ADAPTATION
                      ================================================= -->
 
                 <div
@@ -265,11 +489,14 @@
                     style="display: none;"
                 >
 
+
                     <div class="adaptation-header">
+
 
                         <span class="adaptation-icon">
                             ✦
                         </span>
+
 
                         <div>
 
@@ -277,11 +504,13 @@
                                 Narrative Adaptation
                             </strong>
 
+
                             <p>
                                 Your decision influenced the narrative state.
                             </p>
 
                         </div>
+
 
                     </div>
 
@@ -292,7 +521,9 @@
                     >
                     </div>
 
+
                 </div>
+
 
             </div>
 
@@ -303,15 +534,19 @@
 
             <aside class="state-card">
 
+
                 <div class="state-header">
 
                     <p class="eyebrow">
                         NARRATIVE STATE
                     </p>
 
+
                     <p class="state-description">
-                        Your decisions continuously influence these
-                        narrative characteristics.
+
+                        Your decisions continuously influence
+                        these narrative characteristics.
+
                     </p>
 
                 </div>
@@ -327,11 +562,13 @@
                             Confidence
                         </span>
 
+
                         <span id="confidence-value">
                             0
                         </span>
 
                     </div>
+
 
                     <div class="state-track">
 
@@ -355,11 +592,13 @@
                             Curiosity
                         </span>
 
+
                         <span id="curiosity-value">
                             0
                         </span>
 
                     </div>
+
 
                     <div class="state-track">
 
@@ -383,11 +622,13 @@
                             Momentum
                         </span>
 
+
                         <span id="momentum-value">
                             0
                         </span>
 
                     </div>
+
 
                     <div class="state-track">
 
@@ -411,11 +652,13 @@
                             Reflection
                         </span>
 
+
                         <span id="reflection-value">
                             0
                         </span>
 
                     </div>
+
 
                     <div class="state-track">
 
@@ -439,11 +682,13 @@
                             Risk-taking
                         </span>
 
+
                         <span id="risk-taking-value">
                             0
                         </span>
 
                     </div>
+
 
                     <div class="state-track">
 
@@ -465,15 +710,19 @@
                         Current dominant trait
                     </span>
 
+
                     <strong id="dominant-trait">
                         —
                     </strong>
 
                 </div>
 
+
             </aside>
 
+
         </div>
+
 
     </section>
 
@@ -488,7 +737,9 @@
         style="display: none;"
     >
 
+
         <div class="story-card">
+
 
             <p class="eyebrow">
                 JOURNEY COMPLETE
@@ -501,8 +752,10 @@
 
 
             <p class="summary-intro">
+
                 Your decisions shaped the path, state and ending
                 of this adaptive experience.
+
             </p>
 
 
@@ -520,14 +773,19 @@
                 Begin Another Journey →
             </button>
 
+
         </div>
 
+
     </section>
+
 
 </main>
 
 
+
 <script>
+
 
 /* =========================================================
    GLOBAL VARIABLES
@@ -540,6 +798,7 @@ let currentStage = 1;
 let thinkingInterval = null;
 
 let previousNarrativeState = null;
+
 
 
 /* =========================================================
@@ -598,7 +857,9 @@ function selectEmotion(emotion) {
     document.getElementById(
         "begin-btn"
     ).disabled = false;
+
 }
+
 
 
 /* =========================================================
@@ -721,7 +982,9 @@ async function beginStory() {
         beginButton.textContent =
             "Begin My Story →";
     }
+
 }
+
 
 
 /* =========================================================
@@ -811,7 +1074,9 @@ function displayStory(
 
         }
     );
+
 }
+
 
 
 /* =========================================================
@@ -953,8 +1218,11 @@ async function makeChoice(choice) {
 
             }
         );
+
     }
+
 }
+
 
 
 /* =========================================================
@@ -1001,7 +1269,9 @@ function getCurrentNarrativeState() {
             )
 
     };
+
 }
+
 
 
 /* =========================================================
@@ -1158,7 +1428,9 @@ function showAdaptationResult(
 
     panel.style.display =
         "block";
+
 }
+
 
 
 /* =========================================================
@@ -1179,7 +1451,9 @@ function hideAdaptationResult() {
             "none";
 
     }
+
 }
+
 
 
 /* =========================================================
@@ -1267,7 +1541,9 @@ function showAdaptiveThinking() {
             },
             550
         );
+
 }
+
 
 
 /* =========================================================
@@ -1300,7 +1576,9 @@ function hideAdaptiveThinking() {
 
     thinking.style.display =
         "none";
+
 }
+
 
 
 /* =========================================================
@@ -1319,6 +1597,7 @@ function updateStageDisplay(stage) {
 
         stageElement.textContent =
             stage;
+
     }
 
 
@@ -1342,8 +1621,11 @@ function updateStageDisplay(stage) {
 
         progressBar.style.width =
             percentage + "%";
+
     }
+
 }
+
 
 
 /* =========================================================
@@ -1405,8 +1687,11 @@ function updateNarrativeState(state) {
             formatTraitName(
                 dominantTrait
             );
+
     }
+
 }
+
 
 
 /* =========================================================
@@ -1476,7 +1761,9 @@ function updateStateMetric(
 
     barElement.style.width =
         percentage + "%";
+
 }
+
 
 
 /* =========================================================
@@ -1525,6 +1812,7 @@ function getDominantTrait(state) {
 
                 dominant =
                     trait;
+
             }
 
         }
@@ -1532,7 +1820,9 @@ function getDominantTrait(state) {
 
 
     return dominant;
+
 }
+
 
 
 /* =========================================================
@@ -1565,7 +1855,9 @@ function formatTraitName(trait) {
         names[trait] ||
         trait
     );
+
 }
+
 
 
 /* =========================================================
@@ -1582,6 +1874,7 @@ function buildStateHistoryHTML(
     ) {
 
         return `
+
             <div class="journey-details">
 
                 <h3>
@@ -1593,6 +1886,7 @@ function buildStateHistoryHTML(
                 </p>
 
             </div>
+
         `;
     }
 
@@ -1606,8 +1900,10 @@ function buildStateHistoryHTML(
             </h3>
 
             <p class="history-description">
+
                 Your narrative state evolved as you moved
                 through the journey.
+
             </p>
 
             <div class="history-list">
@@ -1637,6 +1933,7 @@ function buildStateHistoryHTML(
 
 
                     <div class="history-grid">
+
 
                         <div class="history-metric">
 
@@ -1702,11 +1999,13 @@ function buildStateHistoryHTML(
 
                         </div>
 
+
                     </div>
 
                 </div>
 
             `;
+
         }
     );
 
@@ -1721,7 +2020,9 @@ function buildStateHistoryHTML(
 
 
     return html;
+
 }
+
 
 
 /* =========================================================
@@ -1734,7 +2035,6 @@ function showSummary(
 ) {
 
     hideAdaptiveThinking();
-
 
     hideAdaptationResult();
 
@@ -1817,6 +2117,7 @@ function showSummary(
         decisionHTML += `
             </ol>
         `;
+
     }
 
 
@@ -1833,8 +2134,6 @@ function showSummary(
 
     content.innerHTML = `
 
-        <!-- ENDING -->
-
         <div class="ending">
 
             <h3>
@@ -1848,8 +2147,6 @@ function showSummary(
         </div>
 
 
-        <!-- JOURNEY DETAILS -->
-
         <div class="journey-details">
 
             <h3>
@@ -1858,35 +2155,39 @@ function showSummary(
 
 
             <p>
+
                 <strong>
                     Starting emotion:
                 </strong>
 
                 ${summary.starting_emotion}
+
             </p>
 
 
             <p>
+
                 <strong>
                     Dominant trait:
                 </strong>
 
                 ${summary.dominant_trait}
+
             </p>
 
 
             <p>
+
                 <strong>
                     Stages completed:
                 </strong>
 
                 ${summary.stages_completed}
+
             </p>
 
         </div>
 
-
-        <!-- FINAL STATE -->
 
         <div class="journey-details">
 
@@ -1896,47 +2197,57 @@ function showSummary(
 
 
             <p>
+
                 <strong>
                     Confidence:
                 </strong>
 
                 ${finalState.confidence ?? 0}
+
             </p>
 
 
             <p>
+
                 <strong>
                     Curiosity:
                 </strong>
 
                 ${finalState.curiosity ?? 0}
+
             </p>
 
 
             <p>
+
                 <strong>
                     Momentum:
                 </strong>
 
                 ${finalState.momentum ?? 0}
+
             </p>
 
 
             <p>
+
                 <strong>
                     Reflection:
                 </strong>
 
                 ${finalState.reflection ?? 0}
+
             </p>
 
 
             <p>
+
                 <strong>
                     Risk-taking:
                 </strong>
 
                 ${finalState.risk_taking ?? 0}
+
             </p>
 
         </div>
@@ -1948,7 +2259,9 @@ function showSummary(
         ${decisionHTML}
 
     `;
+
 }
+
 
 
 /* =========================================================
@@ -1971,6 +2284,7 @@ async function restartJourney() {
     catch (error) {
 
         console.error(error);
+
     }
 
 
@@ -2043,7 +2357,9 @@ async function restartJourney() {
     updateStageDisplay(
         currentStage
     );
+
 }
+
 
 
 /* =========================================================
@@ -2113,7 +2429,9 @@ function resetNarrativeState() {
             "—";
 
     }
+
 }
+
 
 
 /* =========================================================
@@ -2131,7 +2449,9 @@ document.addEventListener(
     }
 );
 
+
 </script>
+
 
 </body>
 
