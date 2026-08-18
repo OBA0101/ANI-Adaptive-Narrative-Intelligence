@@ -602,15 +602,6 @@
         valueElement.textContent = value;
 
 
-        /*
-         * Convert the narrative state value into
-         * a visual percentage.
-         *
-         * The engine currently allows both negative
-         * and positive values, so we keep a visible
-         * range from -5 to +10.
-         */
-
         const minimum = -5;
         const maximum = 10;
 
@@ -713,6 +704,145 @@
 
 
     // ========================================================
+    // CREATE STATE HISTORY HTML
+    // ========================================================
+
+    function buildStateHistoryHTML(
+        stateHistory
+    ) {
+
+        if (
+            !stateHistory ||
+            stateHistory.length === 0
+        ) {
+
+            return `
+                <div class="journey-details">
+                    <h3>State History</h3>
+                    <p>No state history recorded.</p>
+                </div>
+            `;
+        }
+
+
+        let html = `
+            <div class="journey-details state-history">
+                <h3>State History</h3>
+
+                <p class="history-description">
+                    Your narrative state evolved as you moved
+                    through the journey.
+                </p>
+
+                <div class="history-list">
+        `;
+
+
+        stateHistory.forEach(
+            function(snapshot) {
+
+                const state =
+                    snapshot.state || {};
+
+
+                html += `
+
+                    <div class="history-stage">
+
+                        <div class="history-stage-header">
+
+                            <span>
+                                Stage ${snapshot.stage}
+                            </span>
+
+                        </div>
+
+
+                        <div class="history-grid">
+
+                            <div class="history-metric">
+
+                                <span>
+                                    Confidence
+                                </span>
+
+                                <strong>
+                                    ${state.confidence ?? 0}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="history-metric">
+
+                                <span>
+                                    Curiosity
+                                </span>
+
+                                <strong>
+                                    ${state.curiosity ?? 0}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="history-metric">
+
+                                <span>
+                                    Momentum
+                                </span>
+
+                                <strong>
+                                    ${state.momentum ?? 0}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="history-metric">
+
+                                <span>
+                                    Reflection
+                                </span>
+
+                                <strong>
+                                    ${state.reflection ?? 0}
+                                </strong>
+
+                            </div>
+
+
+                            <div class="history-metric">
+
+                                <span>
+                                    Risk-taking
+                                </span>
+
+                                <strong>
+                                    ${state.risk_taking ?? 0}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                `;
+            }
+        );
+
+
+        html += `
+                </div>
+            </div>
+        `;
+
+
+        return html;
+    }
+
+
+    // ========================================================
     // SHOW SUMMARY
     // ========================================================
 
@@ -746,7 +876,8 @@
 
 
         let decisionHTML =
-            "<h3>Your Decisions</h3>";
+            "<div class='journey-details'>" +
+                "<h3>Your Decisions</h3>";
 
 
         if (decisions.length === 0) {
@@ -782,7 +913,21 @@
         }
 
 
+        decisionHTML +=
+            "</div>";
+
+
+        const stateHistoryHTML =
+            buildStateHistoryHTML(
+                summary.state_history
+            );
+
+
         content.innerHTML =
+
+            /* =========================================
+               ENDING
+               ========================================= */
 
             "<div class='ending'>" +
 
@@ -794,6 +939,10 @@
 
             "</div>" +
 
+
+            /* =========================================
+               JOURNEY DETAILS
+               ========================================= */
 
             "<div class='journey-details'>" +
 
@@ -813,6 +962,10 @@
 
             "</div>" +
 
+
+            /* =========================================
+               FINAL STATE
+               ========================================= */
 
             "<div class='journey-details'>" +
 
@@ -840,6 +993,17 @@
 
             "</div>" +
 
+
+            /* =========================================
+               STATE HISTORY
+               ========================================= */
+
+            stateHistoryHTML +
+
+
+            /* =========================================
+               DECISIONS
+               ========================================= */
 
             decisionHTML;
     }
@@ -923,6 +1087,7 @@
                     document.getElementById(
                         trait + "-value"
                     );
+
 
                 const bar =
                     document.getElementById(

@@ -4,10 +4,13 @@ from narrative_engine import NarrativeEngine
 
 app = Flask(__name__)
 
-# Create the narrative engine
+# ============================================================
+# ANI NARRATIVE ENGINE
+# ============================================================
+
 engine = NarrativeEngine()
 
-# Store the current user's story session
+# Current active journey
 session = None
 
 
@@ -47,7 +50,7 @@ def start_story():
             "error": "Invalid emotion."
         }), 400
 
-    # Save the session
+    # Store the active journey
     session = result["session"]
 
     return jsonify({
@@ -95,7 +98,7 @@ def choose():
             "error": "Unable to process the choice."
         }), 400
 
-    # Keep the updated session
+    # Store the updated journey
     session = result["session"]
 
     response = {
@@ -107,12 +110,22 @@ def choose():
         "state": result["session"]["state"]
     }
 
-    # Include journey summary when the story is complete
+    # --------------------------------------------------------
+    # JOURNEY COMPLETION
+    # --------------------------------------------------------
+
     if result.get("completed", False):
 
-        response["summary"] = engine.get_journey_summary(
+        summary = engine.get_journey_summary(
             session
         )
+
+        # Add the complete state history
+        summary["state_history"] = (
+            session["journey_memory"]["state_snapshots"]
+        )
+
+        response["summary"] = summary
 
     return jsonify(response)
 
@@ -134,6 +147,14 @@ def summary():
 
     result = engine.get_journey_summary(
         session
+    )
+
+    # --------------------------------------------------------
+    # STATE HISTORY
+    # --------------------------------------------------------
+
+    result["state_history"] = (
+        session["journey_memory"]["state_snapshots"]
     )
 
     return jsonify({
@@ -164,6 +185,7 @@ def reset():
 # ============================================================
 
 if __name__ == "__main__":
+
     app.run(
         debug=True
     )
