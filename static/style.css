@@ -1,0 +1,307 @@
+/* =========================================
+   ANI — Adaptive Narrative Intelligence
+   Main Interface Styles
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at top left, #1d3557, transparent 35%),
+        radial-gradient(circle at bottom right, #3a0ca3, transparent 35%),
+        #080b16;
+    color: #f5f7ff;
+    line-height: 1.6;
+}
+
+button {
+    font-family: inherit;
+}
+
+.container {
+    width: min(1100px, 92%);
+    margin: 0 auto;
+    padding: 70px 0;
+}
+
+
+/* =========================================
+   HERO
+   ========================================= */
+
+.hero {
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 55px;
+}
+
+.eyebrow {
+    display: inline-block;
+    margin-bottom: 18px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+
+.hero h1 {
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    line-height: 1.05;
+    margin-bottom: 25px;
+    letter-spacing: -0.04em;
+}
+
+.intro {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.12rem;
+    color: #c7ccdc;
+}
+
+
+/* =========================================
+   STORY CARD
+   ========================================= */
+
+.story-card {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 45px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(18px);
+    box-shadow:
+        0 25px 80px rgba(0, 0, 0, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.story-card h2 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+
+/* =========================================
+   EMOTION GRID
+   ========================================= */
+
+.emotion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.emotion-btn {
+    width: 100%;
+    padding: 17px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.emotion-btn:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.emotion-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   SELECTED EMOTION
+   ========================================= */
+
+.selected-emotion {
+    margin: 20px 0;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #d9def0;
+    text-align: center;
+}
+
+
+/* =========================================
+   BEGIN BUTTON
+   ========================================= */
+
+.begin-btn {
+    width: 100%;
+    margin-top: 10px;
+    padding: 18px 25px;
+    border: none;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #101322;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.begin-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+}
+
+.begin-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   STORY SECTION
+   ========================================= */
+
+.story-section {
+    animation: fadeIn 0.5s ease;
+}
+
+.story-text {
+    margin: 25px 0 35px;
+    padding: 30px;
+    border-left: 3px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 0 18px 18px 0;
+    font-size: 1.18rem;
+    line-height: 1.9;
+    color: #e9ecf7;
+}
+
+.choice-container {
+    display: grid;
+    gap: 14px;
+}
+
+.choice-container .emotion-btn {
+    text-align: left;
+}
+
+
+/* =========================================
+   SUMMARY
+   ========================================= */
+
+.summary-section {
+    animation: fadeIn 0.5s ease;
+}
+
+.summary-content {
+    display: grid;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.summary-content h3 {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+.ending,
+.journey-details {
+    padding: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.ending p {
+    color: #dce1ef;
+    line-height: 1.8;
+}
+
+.journey-details p {
+    margin-bottom: 8px;
+    color: #cbd1e2;
+}
+
+.journey-details strong {
+    color: #ffffff;
+}
+
+.summary-content ol {
+    padding-left: 25px;
+    color: #dce1ef;
+}
+
+.summary-content li {
+    margin-bottom: 10px;
+}
+
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 750px) {
+
+    .container {
+        padding: 40px 0;
+    }
+
+    .story-card {
+        padding: 28px 20px;
+        border-radius: 20px;
+    }
+
+    .emotion-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .intro {
+        font-size: 1rem;
+    }
+
+    .story-text {
+        font-size: 1rem;
+        padding: 20px;
+    }
+}
