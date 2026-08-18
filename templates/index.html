@@ -34,11 +34,8 @@
 
 
     <div class="system-status">
-
         <span class="status-dot"></span>
-
         NARRATIVE ENGINE ONLINE
-
     </div>
 
 
@@ -66,9 +63,7 @@
         </header>
 
 
-        <!-- =================================================
-             HOW ANI WORKS
-             ================================================= -->
+        <!-- HOW ANI WORKS -->
 
         <section class="how-it-works">
 
@@ -79,15 +74,11 @@
                 </span>
 
                 <div>
-
-                    <strong>
-                        Choose
-                    </strong>
+                    <strong>Choose</strong>
 
                     <p>
                         Begin with how you feel right now.
                     </p>
-
                 </div>
 
             </div>
@@ -100,15 +91,11 @@
                 </span>
 
                 <div>
-
-                    <strong>
-                        Decide
-                    </strong>
+                    <strong>Decide</strong>
 
                     <p>
                         Your choices influence the journey.
                     </p>
-
                 </div>
 
             </div>
@@ -121,15 +108,11 @@
                 </span>
 
                 <div>
-
-                    <strong>
-                        Adapt
-                    </strong>
+                    <strong>Adapt</strong>
 
                     <p>
                         ANI continuously responds to your decisions.
                     </p>
-
                 </div>
 
             </div>
@@ -137,9 +120,7 @@
         </section>
 
 
-        <!-- =================================================
-             EMOTION CARD
-             ================================================= -->
+        <!-- EMOTION CARD -->
 
         <section class="story-card">
 
@@ -321,9 +302,7 @@
                 </div>
 
 
-                <!-- =================================================
-                     ADAPTATION FEEDBACK
-                     ================================================= -->
+                <!-- ADAPTIVE THINKING -->
 
                 <div
                     id="adaptive-thinking"
@@ -354,6 +333,8 @@
                 </div>
 
 
+                <!-- CHOICES -->
+
                 <div class="choice-heading">
 
                     <p class="eyebrow">
@@ -376,7 +357,7 @@
 
 
             <!-- =================================================
-                 NARRATIVE STATE
+                 NARRATIVE INTELLIGENCE PANEL
                  ================================================= -->
 
             <aside class="state-card">
@@ -388,8 +369,8 @@
                     </p>
 
                     <p class="state-description">
-                        Your decisions continuously influence these
-                        narrative characteristics.
+                        ANI tracks evolving narrative characteristics
+                        as your decisions shape the journey.
                     </p>
 
                 </div>
@@ -421,6 +402,11 @@
 
                     </div>
 
+                    <div
+                        id="confidence-change"
+                        class="trait-change">
+                    </div>
+
                 </div>
 
 
@@ -448,6 +434,11 @@
                             class="state-bar">
                         </div>
 
+                    </div>
+
+                    <div
+                        id="curiosity-change"
+                        class="trait-change">
                     </div>
 
                 </div>
@@ -479,6 +470,11 @@
 
                     </div>
 
+                    <div
+                        id="momentum-change"
+                        class="trait-change">
+                    </div>
+
                 </div>
 
 
@@ -506,6 +502,11 @@
                             class="state-bar">
                         </div>
 
+                    </div>
+
+                    <div
+                        id="reflection-change"
+                        class="trait-change">
                     </div>
 
                 </div>
@@ -537,6 +538,11 @@
 
                     </div>
 
+                    <div
+                        id="risk-taking-change"
+                        class="trait-change">
+                    </div>
+
                 </div>
 
 
@@ -555,7 +561,32 @@
                 </div>
 
 
-                <!-- ADAPTIVE THINKING -->
+                <!-- NARRATIVE INSIGHT -->
+
+                <div class="narrative-insight">
+
+                    <div class="insight-header">
+
+                        <span class="insight-icon">
+                            ✦
+                        </span>
+
+                        <span>
+                            ANI INSIGHT
+                        </span>
+
+                    </div>
+
+
+                    <p id="narrative-insight-text">
+                        Your narrative profile will emerge as
+                        you make decisions.
+                    </p>
+
+                </div>
+
+
+                <!-- ADAPTATION STATUS -->
 
                 <div
                     id="state-thinking"
@@ -648,6 +679,16 @@ let selectedEmotion = "";
 let currentStage = 1;
 
 
+/*
+ * Previous narrative state.
+ *
+ * Used to determine how the user's traits changed
+ * after every decision.
+ */
+
+let previousState = null;
+
+
 /* =========================================================
    SELECT EMOTION
    ========================================================= */
@@ -667,10 +708,6 @@ function selectEmotion(emotion) {
         "begin-btn"
     ).disabled = false;
 
-
-    /*
-     * Highlight selected emotion.
-     */
 
     const emotionButtons =
         document.querySelectorAll(
@@ -768,10 +805,21 @@ async function beginStory() {
                 "Begin My Story →";
 
             return;
+
         }
 
 
         currentStage = 1;
+
+
+        /*
+         * Store the initial narrative state.
+         */
+
+        previousState =
+            cloneState(
+                data.state
+            );
 
 
         document.getElementById(
@@ -797,6 +845,10 @@ async function beginStory() {
 
         updateStageDisplay();
 
+
+        updateNarrativeInsight(
+            data.state
+        );
 
     }
 
@@ -835,10 +887,6 @@ function displayStory(
         );
 
 
-    /*
-     * Trigger story animation.
-     */
-
     storyElement.classList.remove(
         "story-reveal-active"
     );
@@ -865,18 +913,11 @@ function displayStory(
     container.innerHTML = "";
 
 
-    /*
-     * Hide adaptive thinking.
-     */
-
     hideAdaptiveThinking();
 
 
-    /*
-     * Create choice buttons.
-     */
-
-    if (!choices || choices.length === 0) {
+    if (!choices ||
+        choices.length === 0) {
 
         return;
 
@@ -930,10 +971,6 @@ function displayStory(
 
 async function makeChoice(choice) {
 
-    /*
-     * Prevent duplicate clicks.
-     */
-
     const choiceButtons =
         document.querySelectorAll(
             "#choice-container .emotion-btn"
@@ -948,10 +985,6 @@ async function makeChoice(choice) {
         }
     );
 
-
-    /*
-     * Show adaptation animation.
-     */
 
     showAdaptiveThinking();
 
@@ -980,12 +1013,7 @@ async function makeChoice(choice) {
             await response.json();
 
 
-        /*
-         * Give the adaptation feedback
-         * enough time to be visible.
-         */
-
-        await delay(450);
+        await delay(500);
 
 
         if (!data.success) {
@@ -1009,21 +1037,62 @@ async function makeChoice(choice) {
 
 
             return;
+
         }
 
 
         /*
-         * Update state first.
+         * Capture the new state before updating
+         * the display.
+         */
+
+        const newState =
+            data.state;
+
+
+        /*
+         * Calculate movement between states.
+         */
+
+        if (previousState &&
+            newState) {
+
+            showTraitChanges(
+                previousState,
+                newState
+            );
+
+        }
+
+
+        /*
+         * Update state display.
          */
 
         updateNarrativeState(
-            data.state
+            newState
         );
 
 
         /*
-         * Increase stage.
+         * Generate the new ANI interpretation.
          */
+
+        updateNarrativeInsight(
+            newState
+        );
+
+
+        /*
+         * Save current state for the
+         * next decision.
+         */
+
+        previousState =
+            cloneState(
+                newState
+            );
+
 
         currentStage += 1;
 
@@ -1032,7 +1101,7 @@ async function makeChoice(choice) {
 
 
         /*
-         * Check if journey is complete.
+         * Journey completed.
          */
 
         if (data.completed) {
@@ -1052,7 +1121,7 @@ async function makeChoice(choice) {
 
 
         /*
-         * Display next narrative.
+         * Continue story.
          */
 
         displayStory(
@@ -1084,6 +1153,164 @@ async function makeChoice(choice) {
         );
 
     }
+
+}
+
+
+/* =========================================================
+   CLONE STATE
+   ========================================================= */
+
+function cloneState(state) {
+
+    if (!state) {
+        return null;
+    }
+
+
+    return {
+
+        confidence:
+            Number(state.confidence || 0),
+
+        curiosity:
+            Number(state.curiosity || 0),
+
+        momentum:
+            Number(state.momentum || 0),
+
+        reflection:
+            Number(state.reflection || 0),
+
+        risk_taking:
+            Number(state.risk_taking || 0)
+
+    };
+
+}
+
+
+/* =========================================================
+   SHOW TRAIT CHANGES
+   ========================================================= */
+
+function showTraitChanges(
+    oldState,
+    newState
+) {
+
+    const traits = [
+        "confidence",
+        "curiosity",
+        "momentum",
+        "reflection",
+        "risk_taking"
+    ];
+
+
+    traits.forEach(
+        function(trait) {
+
+            const oldValue =
+                Number(
+                    oldState[trait] || 0
+                );
+
+
+            const newValue =
+                Number(
+                    newState[trait] || 0
+                );
+
+
+            const change =
+                newValue - oldValue;
+
+
+            const displayName =
+                formatTraitName(
+                    trait
+                );
+
+
+            const element =
+                document.getElementById(
+                    trait === "risk_taking"
+                        ? "risk-taking-change"
+                        : trait + "-change"
+                );
+
+
+            if (!element) {
+                return;
+            }
+
+
+            element.className =
+                "trait-change";
+
+
+            if (change > 0) {
+
+                element.textContent =
+                    "↑ " +
+                    displayName +
+                    " +" +
+                    change;
+
+
+                element.classList.add(
+                    "positive"
+                );
+
+            }
+
+            else if (change < 0) {
+
+                element.textContent =
+                    "↓ " +
+                    displayName +
+                    " " +
+                    change;
+
+
+                element.classList.add(
+                    "negative"
+                );
+
+            }
+
+            else {
+
+                element.textContent =
+                    "→ Stable";
+
+
+                element.classList.add(
+                    "stable"
+                );
+
+            }
+
+
+            /*
+             * Remove the message after a few seconds.
+             */
+
+            setTimeout(
+                function() {
+
+                    element.textContent = "";
+
+                    element.className =
+                        "trait-change";
+
+                },
+                3500
+            );
+
+        }
+    );
 
 }
 
@@ -1157,27 +1384,229 @@ function hideAdaptiveThinking() {
 
 
 /* =========================================================
-   DELAY
+   NARRATIVE INSIGHT
    ========================================================= */
 
-function delay(milliseconds) {
+function updateNarrativeInsight(state) {
 
-    return new Promise(
-        function(resolve) {
+    const insightElement =
+        document.getElementById(
+            "narrative-insight-text"
+        );
 
-            setTimeout(
-                resolve,
-                milliseconds
-            );
+
+    if (!insightElement ||
+        !state) {
+
+        return;
+
+    }
+
+
+    const dominantTrait =
+        getDominantTrait(
+            state
+        );
+
+
+    const dominantValue =
+        Number(
+            state[dominantTrait] || 0
+        );
+
+
+    const name =
+        formatTraitName(
+            dominantTrait
+        );
+
+
+    let message = "";
+
+
+    /*
+     * Interpret the dominant trait.
+     */
+
+    if (dominantTrait === "confidence") {
+
+        if (dominantValue >= 6) {
+
+            message =
+                "Confidence is strongly shaping your journey. " +
+                "You are increasingly willing to act on your own judgment.";
 
         }
+
+        else if (dominantValue > 0) {
+
+            message =
+                "Confidence is beginning to influence your decisions. " +
+                "Your narrative is responding to your willingness to act.";
+
+        }
+
+        else {
+
+            message =
+                "Confidence is still developing. " +
+                "The choices ahead may create opportunities to strengthen it.";
+
+        }
+
+    }
+
+
+    else if (dominantTrait === "curiosity") {
+
+        if (dominantValue >= 6) {
+
+            message =
+                "Curiosity is driving your journey. " +
+                "You are increasingly drawn toward discovery and uncertainty.";
+
+        }
+
+        else if (dominantValue > 0) {
+
+            message =
+                "Curiosity is influencing your path. " +
+                "Your decisions suggest a growing desire to explore.";
+
+        }
+
+        else {
+
+            message =
+                "Your curiosity is relatively quiet right now. " +
+                "The narrative may change as you encounter new possibilities.";
+
+        }
+
+    }
+
+
+    else if (dominantTrait === "momentum") {
+
+        if (dominantValue >= 6) {
+
+            message =
+                "Momentum is carrying the narrative forward. " +
+                "Your choices show a strong tendency toward action.";
+
+        }
+
+        else if (dominantValue > 0) {
+
+            message =
+                "Momentum is building. " +
+                "Your decisions are beginning to create forward movement.";
+
+        }
+
+        else {
+
+            message =
+                "Momentum remains limited. " +
+                "A decisive choice could change the direction of your journey.";
+
+        }
+
+    }
+
+
+    else if (dominantTrait === "reflection") {
+
+        if (dominantValue >= 6) {
+
+            message =
+                "Reflection is shaping your journey. " +
+                "You are giving deeper consideration to the meaning of your choices.";
+
+        }
+
+        else if (dominantValue > 0) {
+
+            message =
+                "Reflection is becoming more influential. " +
+                "Your journey is responding to thoughtful decision-making.";
+
+        }
+
+        else {
+
+            message =
+                "Reflection has not yet become a dominant force. " +
+                "Your next decisions may reveal more about your inner direction.";
+
+        }
+
+    }
+
+
+    else if (dominantTrait === "risk_taking") {
+
+        if (dominantValue >= 6) {
+
+            message =
+                "Risk-taking is strongly influencing your path. " +
+                "You are increasingly willing to step beyond familiar territory.";
+
+        }
+
+        else if (dominantValue > 0) {
+
+            message =
+                "Risk-taking is emerging in your narrative profile. " +
+                "Your choices show some willingness to embrace uncertainty.";
+
+        }
+
+        else {
+
+            message =
+                "Your current path favours caution. " +
+                "The narrative may shift if you choose greater uncertainty.";
+
+        }
+
+    }
+
+
+    else {
+
+        message =
+            name +
+            " is currently the strongest influence on your narrative.";
+
+    }
+
+
+    /*
+     * Animate insight change.
+     */
+
+    insightElement.classList.remove(
+        "insight-update"
     );
+
+
+    void insightElement.offsetWidth;
+
+
+    insightElement.classList.add(
+        "insight-update"
+    );
+
+
+    insightElement.textContent =
+        message;
 
 }
 
 
 /* =========================================================
-   UPDATE STAGE DISPLAY
+   UPDATE STAGE
    ========================================================= */
 
 function updateStageDisplay() {
@@ -1204,15 +1633,11 @@ function updateStageDisplay() {
 
     if (progressBar) {
 
-        /*
-         * Visual progress only.
-         * It does not affect the backend.
-         */
-
         const percentage =
             Math.min(
                 100,
-                8 + (
+                8 +
+                (
                     (currentStage - 1)
                     * 17
                 )
@@ -1269,15 +1694,38 @@ function updateNarrativeState(state) {
 
 
     const dominantTrait =
-        getDominantTrait(state);
-
-
-    document.getElementById(
-        "dominant-trait"
-    ).textContent =
-        formatTraitName(
-            dominantTrait
+        getDominantTrait(
+            state
         );
+
+
+    const dominantElement =
+        document.getElementById(
+            "dominant-trait"
+        );
+
+
+    if (dominantElement) {
+
+        dominantElement.classList.remove(
+            "dominant-update"
+        );
+
+
+        void dominantElement.offsetWidth;
+
+
+        dominantElement.classList.add(
+            "dominant-update"
+        );
+
+
+        dominantElement.textContent =
+            formatTraitName(
+                dominantTrait
+            );
+
+    }
 
 }
 
@@ -1354,7 +1802,9 @@ function getDominantTrait(state) {
 
 
     let highest =
-        state.confidence;
+        Number(
+            state.confidence || 0
+        );
 
 
     const traits = [
@@ -1369,13 +1819,16 @@ function getDominantTrait(state) {
     traits.forEach(
         function(trait) {
 
-            if (
-                state[trait] >
-                highest
-            ) {
+            const value =
+                Number(
+                    state[trait] || 0
+                );
+
+
+            if (value > highest) {
 
                 highest =
-                    state[trait];
+                    value;
 
                 dominant =
                     trait;
@@ -1662,10 +2115,6 @@ function showSummary(
 
     content.innerHTML =
 
-        /*
-         * ENDING
-         */
-
         "<div class='ending'>" +
 
             "<h3>Your Ending</h3>" +
@@ -1676,10 +2125,6 @@ function showSummary(
 
         "</div>" +
 
-
-        /*
-         * JOURNEY DETAILS
-         */
 
         "<div class='journey-details'>" +
 
@@ -1705,10 +2150,6 @@ function showSummary(
 
         "</div>" +
 
-
-        /*
-         * FINAL STATE
-         */
 
         "<div class='journey-details'>" +
 
@@ -1747,16 +2188,8 @@ function showSummary(
         "</div>" +
 
 
-        /*
-         * STATE HISTORY
-         */
-
         stateHistoryHTML +
 
-
-        /*
-         * DECISIONS
-         */
 
         decisionHTML;
 
@@ -1764,7 +2197,7 @@ function showSummary(
 
 
 /* =========================================================
-   RESTART JOURNEY
+   RESTART
    ========================================================= */
 
 async function restartJourney() {
@@ -1790,6 +2223,8 @@ async function restartJourney() {
     selectedEmotion = "";
 
     currentStage = 1;
+
+    previousState = null;
 
 
     document.getElementById(
@@ -1825,10 +2260,6 @@ async function restartJourney() {
         "Begin My Story →";
 
 
-    /*
-     * Remove selected emotion styling.
-     */
-
     document
         .querySelectorAll(
             ".emotion-btn[data-emotion]"
@@ -1847,6 +2278,20 @@ async function restartJourney() {
     hideAdaptiveThinking();
 
 
+    const insight =
+        document.getElementById(
+            "narrative-insight-text"
+        );
+
+
+    if (insight) {
+
+        insight.textContent =
+            "Your narrative profile will emerge as you make decisions.";
+
+    }
+
+
     updateStageDisplay();
 
 
@@ -1856,7 +2301,7 @@ async function restartJourney() {
 
 
 /* =========================================================
-   RESET NARRATIVE STATE DISPLAY
+   RESET STATE DISPLAY
    ========================================================= */
 
 function resetNarrativeState() {
@@ -1885,6 +2330,12 @@ function resetNarrativeState() {
                 );
 
 
+            const change =
+                document.getElementById(
+                    trait + "-change"
+                );
+
+
             if (value) {
 
                 value.textContent =
@@ -1897,6 +2348,17 @@ function resetNarrativeState() {
 
                 bar.style.width =
                     "33%";
+
+            }
+
+
+            if (change) {
+
+                change.textContent =
+                    "";
+
+                change.className =
+                    "trait-change";
 
             }
 
@@ -1916,6 +2378,26 @@ function resetNarrativeState() {
             "—";
 
     }
+
+}
+
+
+/* =========================================================
+   DELAY
+   ========================================================= */
+
+function delay(milliseconds) {
+
+    return new Promise(
+        function(resolve) {
+
+            setTimeout(
+                resolve,
+                milliseconds
+            );
+
+        }
+    );
 
 }
 
